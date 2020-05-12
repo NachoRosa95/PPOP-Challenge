@@ -98,17 +98,29 @@ public class Tile : MonoBehaviour, IAStarNode
 
     #region Public Methods
 
+    /// <summary>
+    /// Associates this tile with its controlling layout
+    /// </summary>
+    /// <param name="layout"></param>
     public void SetLayout(HexLayout layout)
     {
         this.layout = layout;
     }
 
+    /// <summary>
+    /// Updates this tile's hex to the given coordinates
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
     public void SetCoords(int i, int j)
     {
         var cubeCoords = OffsetCoord.RoffsetToCube(-1, new OffsetCoord(i, j));
         Hex = new Hex(cubeCoords.q, cubeCoords.r, cubeCoords.s);
     }
 
+    /// <summary>
+    /// Finds and caches all neighboring tiles
+    /// </summary>
     public void CacheNeighbors()
     {
         neighbours.Clear();
@@ -122,6 +134,11 @@ public class Tile : MonoBehaviour, IAStarNode
         }
     }
 
+    /// <summary>
+    /// Gets precise cost to move to a neighboring tile
+    /// </summary>
+    /// <param name="neighbour"></param>
+    /// <returns>Returns the precise cost</returns>
     public float CostTo(IAStarNode neighbour)
     {
         var tile = neighbour as Tile;
@@ -129,6 +146,11 @@ public class Tile : MonoBehaviour, IAStarNode
         return tile.travelCost;
     }
 
+    /// <summary>
+    /// Gets estimated cost to move to any given tile
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns>Returns the estimated cost</returns>
     public float EstimatedCostTo(IAStarNode target)
     {
         var tile = target as Tile;

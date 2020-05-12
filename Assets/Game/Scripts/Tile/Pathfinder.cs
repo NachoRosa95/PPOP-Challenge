@@ -41,6 +41,12 @@ public class Pathfinder : MonoBehaviour
 
     #region Public Methods
 
+    /// <summary>
+    /// Gets shortest path between two tiles
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="goal"></param>
+    /// <returns>Returns shortest path as an IEnumerable of Tile</returns>
     public IEnumerable<Tile> GetPath(Tile start, Tile goal)
     {
         var path = AStar.GetPath(start, goal);
@@ -54,6 +60,10 @@ public class Pathfinder : MonoBehaviour
         return lastPath;
     }
 
+    /// <summary>
+    /// Called when a tile is clicked
+    /// </summary>
+    /// <param name="tile"></param>
     public void OnTileClicked(Tile tile)
     {
         if (start == null) start = tile;
@@ -68,12 +78,16 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when a tile is hovered over
+    /// </summary>
+    /// <param name="tile"></param>
     public void OnTileEntered(Tile tile)
     {
         if (start == null) return;
         else if (goal == null)
         {
-            GetPath(start, tile);   
+            GetPath(start, tile);
         }
     }
 
@@ -81,6 +95,9 @@ public class Pathfinder : MonoBehaviour
 
     #region Non Public Methods
 
+    /// <summary>
+    /// Updates the attached LineRenderer to display the last valid path
+    /// </summary>
     private void UpdateRenderer()
     {
         if (!lineRenderer) lineRenderer = GetComponent<LineRenderer>();
