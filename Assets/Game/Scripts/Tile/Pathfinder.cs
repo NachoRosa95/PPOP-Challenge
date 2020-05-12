@@ -60,12 +60,20 @@ public class Pathfinder : MonoBehaviour
         else if (goal == null)
         {
             goal = tile;
-            GetPath(goal, start);
         }
         else
         {
             start = tile;
             goal = null;
+        }
+    }
+
+    public void OnTileEntered(Tile tile)
+    {
+        if (start == null) return;
+        else if (goal == null)
+        {
+            GetPath(start, tile);   
         }
     }
 

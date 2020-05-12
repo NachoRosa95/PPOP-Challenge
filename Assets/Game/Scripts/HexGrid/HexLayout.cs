@@ -114,7 +114,7 @@ namespace Layout
                         tilesDictionary.Add(tile.Hex, tile);
 
                         tile.transform.position = GridToWorldPos(i, j);
-                        tile.OnPointerEnter.AddListener(Highlight);
+                        tile.OnPointerEnter.AddListener(pathfinder.OnTileEntered);
                         tile.OnPointerClick.AddListener(pathfinder.OnTileClicked);
 
                         if (!preserveScale) tile.transform.localScale = new Vector3(hexWidth, (hexWidth + hexHeight) / 2f, hexHeight);
